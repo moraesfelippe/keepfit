@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+* {
+    margin: 3px;
+    padding: 2px
+}
+
+.blocos {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:center;
+    background-color: #F28705;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: none;
+    border-radius: 10px;
+    box-shadow: 1px 3px 5px 5px #0000006c;
+    }
+    .TMB>h2 {
+        color: black;
+        text-align: center;
+    }
+    .TMB {
+        min-width: 250px; max-width: 400px;
+        background-color: #F29F05;
+        box-shadow: 1px 3px 5px 5px #00000047;
+        border-radius: 10px;
+        text-align: center;
+        }
+    .macro>h2 {
+        color: black;
+        text-align: center;
+    }
+    .macro {
+        min-width: 250px; max-width: 400px;
+        
+        background-color: #F29F05;
+        box-shadow: 1px 3px 5px 5px #00000047;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+form #gender {
+    height: 30px;
+    width: 200px;
+    color: #267365;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    }
+
+form #goal {
+    height: 30px;
+    width: 200px;
+    color: #267365;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    }
+
+    
+form input {
+    height: 20px;
+    border-radius: 10px;
+    outline: unset;
+    }
+
+form label {
+    color: black;
+    font-size: 20px;
+    }
+
+form #activityLevel {
+    height: 30px;
+    max-width: 200px;
+    color: #267365;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    }
+
+header {
+    color: antiquewhite;
+    background-color: #267365;
+    height:75px;
+    text-align: center;
+    box-shadow: 1px 3px 5px 5px #0000006c;
+    border-radius: 10px;    
+    }
+form button {
+    outline: unset;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.37);
+    border: 1px solid #267365;
+    color:beige;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    margin-bottom: 20PX;
+    background-image: linear-gradient(to right,#267365,#015958)
+    }
+
+    #macroResult {
+        margin-top: 30px;
+    }
+footer {
+    color: antiquewhite;
+    background-color: #267365;
+    height:25px;
+    text-align: center;
+    box-shadow: 1px 3px 5px 5px #0000006c;
+    border-radius: 10px;
+    }
+

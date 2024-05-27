@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeepFit</title>
+    <link rel="stylesheet" href="fit3.css">
+    
+</head>
+<body>
+    <header>
+<H1 class="titulo">Calculadora de Taxa Metabólica Basal (TMB) e Macronutrientes</H1>
+    </header>
+
+    <div class="blocos"> 
+        <div class="TMB">
+            
+            <h2>Calculadora de Gasto Energético Total (GET)</h1>
+            <form id="getForm">
+                <label for="gender">Gênero:</label>
+                <select id="gender" name="gender">
+                    <option value="male">Masculino</option>
+                    <option value="female">Feminino</option>
+                </select><br><br>
+                
+                <label for="age">Idade (em anos):</label>
+                <input type="number" id="age" name="age" required><br><br>
+                
+                <label for="weight">Peso (em kg):</label>
+                <input type="number" id="weight" name="weight" required><br><br>
+                
+                <label for="height">Altura (em cm):</label>
+                <input type="number" id="height" name="height" required><br><br>
+        
+                <label for="activityLevel">Nível de Atividade Física:</label>
+                <select id="activityLevel" name="activityLevel">
+                    <option value="1.2">Sedentário (pouco ou nenhum exercício)</option>
+                    <option value="1.375">Levemente ativo (exercício leve 1-3 dias/semana)</option>
+                    <option value="1.55">Moderadamente ativo (exercício moderado 3-5 dias/semana)</option>
+                    <option value="1.725">Muito ativo (exercício intenso 6-7 dias/semana)</option>
+                    <option value="1.9">Extremamente ativo (trabalho físico pesado/exercício muito intenso)</option>
+                </select><br><br>
+                
+                <button type="button" onclick="calculateGET()">Calcular GET</button>
+            </form>
+            
+            <h2 id="getResult"></h2>
+    
+        </div>
+        <div class="macro">
+    <h2>Calculadora de Macronutrientes</h1>
+        <form id="macroForm">
+            <label for="goal">Objetivo:</label>
+            <select id="goal" name="goal">
+                <option value="muscle">Construção Muscular</option>
+                <option value="weightLoss">Perda de Peso</option>
+            </select><br><br>
+            
+            <label for="sumInput">Soma de TMB e GET (calorias por dia):</label>
+            <input type="number" id="sumInput" name="sumInput" required readonly><br><br>
+            
+            <button type="button" onclick="calculateMacros()">Calcular Macronutrientes</button>
+        </form>
+        
+        <h2 id="macroResult"></h2></h2>
+        </div>
+    </div>
+
+<footer>
+    <h3>Site criado para fins de estudos.</h3>
+</footer>
+
+
+<script>
+    function calculateGET() {
+        // Obter os valores dos campos de entrada
+        const gender = document.getElementById('gender').value;
+        const age = document.getElementById('age').value;
+        const weight = document.getElementById('weight').value;
+        const height = document.getElementById('height').value;
+        const activityLevel = document.getElementById('activityLevel').value;
+        
+        let tmb;
+
+        // Calcular a TMB com base no gênero
+        if (gender === 'male') {
+            tmb = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+        } else if (gender === 'female') {
+            tmb = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+        }
+
+        // Calcular o GET com base no nível de atividade física
+        const get = tmb * activityLevel;
+
+        // Calcular a soma de TMB e GET
+        const sum = tmb + get;
+
+        // Exibir o resultado
+        document.getElementById('getResult').innerText = `Sua TMB é: ${tmb.toFixed(2)} calorias por dia\nSeu GET é: ${get.toFixed(2)} calorias por dia\nA soma da TMB e GET é: ${sum.toFixed(2)} calorias por dia`;
+        
+        // Preencher o campo Soma de TMB e GET na segunda form
+        document.getElementById('sumInput').value = sum.toFixed(2);
+    }
+
+    function calculateMacros() {
+        // Obter o objetivo e a soma de TMB e GET
+        const goal = document.getElementById('goal').value;
+        const sum = document.getElementById('sumInput').value;
+
+        let calories;
+        if (goal === 'muscle') {
+            // Construção muscular: geralmente se adiciona um excedente de 250-500 calorias
+            calories = parseFloat(sum) + 250;
+        } else if (goal === 'weightLoss') {
+            // Perda de peso: geralmente se cria um déficit de 500 calorias
+            calories = parseFloat(sum) - 500;
+        }
+
+        // Calcular os macronutrientes
+        const protein = 0.3 * calories / 4; // 30% de proteínas, 4 calorias por grama
+        const carbs = 0.5 * calories / 4;  // 50% de carboidratos, 4 calorias por grama
+        const fat = 0.2 * calories / 9;    // 20% de gorduras, 9 calorias por grama
+
+        // Exibir o resultado
+        document.getElementById('macroResult').innerText = 
+            `Para o objetivo de ${goal === 'muscle' ? 'construção muscular' : 'perda de peso'}:\n` +
+            `Calorias: ${calories.toFixed(2)} kcal por dia\n` +
+            `Proteínas: ${protein.toFixed(2)} g por dia\n` +
+            `Carboidratos: ${carbs.toFixed(2)} g por dia\n` +
+            `Gorduras: ${fat.toFixed(2)} g por dia`;
+    }
+</script>
+</body>
+</html>
